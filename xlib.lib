@@ -1,0 +1,87 @@
+PROCDEF:send_scp_to_dev SERVER={10.242.15.247} USER={yoshen} PWD={Ct!X1hU5?B)V8P%f} SF
+	[T:3600]SEND:copy scp: disk0:
+	XPECT:Address or name of remote host
+		SEND:${A:SERVER}
+	XEND:LOOP
+	XPECT:Source username
+		SEND:${A:USER}
+	XEND:LOOP
+	XPECT:Source filename
+		SEND:${A:SF}
+	XEND:LOOP
+	XPECT:Destination filename
+		SEND:
+	XEND:LOOP
+	[R]XPECT:[Pp]assword:
+		SEND:${A:PWD}
+	XEND:LOOP
+	XPECT:Are you sure you want to continue connecting (yes/no)?
+		SEND:yes
+	XEND:LOOP
+	XPECT:Do you want to over write?
+		SEND:
+	XEND:LOOP
+	XPECT:#
+	XEND
+PROCEND
+
+PROCDEF:send_tftp_to_dev SERVER={10.176.6.50} SF
+	[T:3600]SEND:copy tftp: disk0:
+	XPECT:Address or name of remote host
+		SEND:${A:SERVER}
+	XEND:LOOP
+	XPECT:Source username
+		SEND:${A:USER}
+	XEND:LOOP
+	XPECT:Source filename
+		SEND:${A:SF}
+	XEND:LOOP
+	XPECT:Destination filename
+		SEND:
+	XEND:LOOP
+	XPECT:#
+	XEND
+PROCEND
+
+PROCDEF:exec_scp_from_dev SF DF={.}
+	[T:3600]EXEC:scp ${DEV:USR}@${DEV:IP}:${A:SF} ${A:DF}
+	XPECT:Are you sure you want to continue connecting (yes/no)?
+		SEND:yes
+	XEND:LOOP
+	[R]XPECT:[pP]assword:
+		[T:120]SEND:${DEV:PWD}
+	XEND:LOOP
+	XPECT:No such file or directory
+	XEND:FAIL
+	XPECT:100%
+	XEND
+PROCEND
+
+PROCDEF:exec_scp_to_dev SF DF
+	[T:3600]EXEC:scp ${A:SF} ${DEV:USR}@${DEV:IP}:${A:DF}
+	XPECT:Are you sure you want to continue connecting (yes/no)?
+		SEND:yes
+	XEND:LOOP
+	[R]XPECT:[pP]assword:
+		SEND:${DEV:PWD}
+	XEND:LOOP
+	XPECT:No such file or directory
+	XEND:FAIL
+	XPECT:100%
+	XEND
+PROCEND
+
+PROCDEF:connect_with_dav 
+	#CONNECT:USERNAME=SRV-NW-HPNAS-FR-PD PASSWORD=4-TawrESp_2uP3he LOGIN_PROMPT=> ENABLE_PROMPT=#
+	CONNECT:USERNAME=c215914 PASSWORD=Y0ngh0ng)) LOGIN_PROMPT=> ENABLE_PROMPT=#
+	XERROR
+		REGEX:${DEV:IP},No access
+		<A:dav>XPECT:(.*)
+		XEND:FAIL
+	XEND
+
+	REGEX:${DEV:IP},${DEV:USR},${DEV:PWD}
+	<A:dav>XPECT:(.*)
+	XEND
+PROCEND
+
