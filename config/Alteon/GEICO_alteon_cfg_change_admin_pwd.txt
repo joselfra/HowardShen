@@ -1,0 +1,38 @@
+CONNECT:USERNAME=admin PASSWORD=Ct!X1hU5?B)V8P%f LOGIN_PROMPT=# CIPHER=3des
+XERROR
+	CONNECT:USERNAME=admin PASSWORD=Ct!X1hU5?B)V8P%f LOGIN_PROMPT=# 
+XEND
+
+SEND:/cfg/sys/access/user
+EXPECT:User Access Control#
+
+SEND:admpw
+EXPECT:Enter current admin password:
+
+SEND:Ct!X1hU5?B)V8P%f
+EXPECT:Enter new administrator password:
+
+SEND:D97EXwnE1$1lQoxhT1j#
+EXPECT:Re-enter new administrator password:
+
+SEND:D97EXwnE1$1lQoxhT1j#
+EXPECT:User Access Control#
+
+[T:60]SEND:apply
+XPECT:The Apply may take a couple of minutes. Do you wish to proceed? [y/n]:
+	SEND:y
+XEND:LOOP
+XPECT:User Access Control#
+XEND
+
+SEND:save
+XPECT:Confirm saving to FLASH
+	SEND:y
+XEND:LOOP
+[R]XPECT:User Access Control#.*No save needed
+XEND
+XPECT:User Access Control#
+XEND
+
+
+DISCONNECT

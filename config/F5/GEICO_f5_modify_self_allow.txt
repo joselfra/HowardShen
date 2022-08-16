@@ -1,0 +1,19 @@
+CONNECT:USERNAME=root PASSWORD=D97EXwnE1$1lQoxhT1j# LOGIN_PROMPT=#
+
+# make sure we're entering the bash shell
+#
+[T:1]SEND:
+XPECT:config #
+XEND
+XOTHER
+	SEND:bash
+XEND
+
+COLLECT:tmsh list net self
+
+
+SEND:tmsh modify /net self all allow-service none
+EXPECT:#
+
+[T:120]SEND:tmsh save sys config
+EXPECT:#

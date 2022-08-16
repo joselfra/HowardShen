@@ -1,0 +1,23 @@
+CONNECT:LOGIN_PROMPT=#
+#CONNECT:USERNAME=root PASSWORD=Ct!X1hU5?B)V8P%f LOGIN_PROMPT=#
+
+# make sure we're entering the bash shell
+#
+[T:1]SEND:
+XPECT:config #
+XEND
+XOTHER
+	SEND:bash
+XEND
+
+SEND:tmsh modify auth user admin prompt-for-password
+EXPECT:new password:
+
+SEND:D97EXwnE1$1lQoxhT1j#
+EXPECT:confirm password:
+
+SEND:D97EXwnE1$1lQoxhT1j#
+EXPECT:#
+
+[T:120]SEND:tmsh save sys config
+EXPECT:#
