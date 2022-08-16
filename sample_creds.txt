@@ -1,3 +1,5 @@
+# This file serves as a password DB.
+
 RULENAME:1Q2021_root
 USERNAME:root
 PASSWORD:Ct!X1hU5?B)V8P%f
