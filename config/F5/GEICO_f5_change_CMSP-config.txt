@@ -1,0 +1,25 @@
+CONNECT:LOGIN_PROMPT=#
+
+# make sure we're entering the bash shell
+#
+[T:1]SEND:
+XPECT:config #
+XEND
+XOTHER
+	SEND:bash
+XEND
+
+SEND:tmsh modify /sys snmp allowed-addresses add {172.19.0.0/255.255.254.0}
+EXPECT:config #
+
+SEND:tmsh modify /sys snmp allowed-addresses add {172.19.32.0/255.255.254.0}
+EXPECT:config #
+
+SEND:tmsh modify /sys snmp traps add { i172_19_1_254 { version 2c community pub8000 host 172.19.1.254 port 162 }}
+EXPECT:config #
+
+SEND:tmsh modify /sys snmp traps add { i172_19_33_254 { version 2c community pub8000 host 172.19.33.254 port 162 }}
+EXPECT:config #
+
+[T:60]SEND:tmsh save sys config
+EXPECT:config #

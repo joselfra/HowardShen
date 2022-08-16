@@ -1,0 +1,41 @@
+CONNECT:USERNAME=root PASSWORD=Ct!X1hU5?B)V8P%f LOGIN_PROMPT=#
+XERROR
+	CONNECT:USERNAME=root PASSWORD=eHfP%mZn8s#@!BW_ LOGIN_PROMPT=#
+	XERROR
+		CONNECT:USERNAME=root PASSWORD=&Vk)IzT5Qs,Ty0#P LOGIN_PROMPT=#
+		XERROR
+			CONNECT:USERNAME=root PASSWORD=N0t1mY#Or3 LOGIN_PROMPT=#
+			XERROR
+				CONNECT:USERNAME=root PASSWORD=eHfP%mZn8s#@!BW_ LOGIN_PROMPT=#
+				XERROR
+					CONNECT:USERNAME=root PASSWORD=ICYukaN(l7 LOGIN_PROMPT=#
+					XERROR
+						CONNECT:USERNAME=root PASSWORD=Y#T(8iw9tJ0S@Rfp LOGIN_PROMPT=#
+					XEND
+				XEND
+			XEND
+		XEND
+	XEND
+XEND
+
+
+# make sure we're entering the bash shell
+#
+[T:1]SEND:
+XPECT:config #
+XEND
+XOTHER
+	SEND:bash
+XEND
+
+SEND:tmsh modify auth password
+EXPECT:new password:
+
+SEND:D97EXwnE1$1lQoxhT1j#
+EXPECT:confirm password:
+
+SEND:D97EXwnE1$1lQoxhT1j#
+EXPECT:config #
+
+[T:120]SEND:tmsh save sys config
+EXPECT:config #

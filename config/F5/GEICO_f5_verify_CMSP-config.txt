@@ -1,0 +1,22 @@
+CONNECT:LOGIN_PROMPT=#
+
+# make sure we're entering the bash shell
+#
+[T:1]SEND:
+XPECT:config #
+XEND
+XOTHER
+	SEND:bash
+XEND
+
+SEND:tmsh list /sys snmp allowed-addresses
+EXPECT:172.19.0.0/255.255.254.0
+
+SEND:tmsh list /sys snmp allowed-addresses
+EXPECT:172.19.32.0/255.255.254.0
+
+SEND:tmsh list /sys snmp traps 
+EXPECT:172.19.1.254
+
+SEND:tmsh list /sys snmp traps 
+EXPECT:172.19.33.254
