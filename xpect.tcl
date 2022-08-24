@@ -1,4 +1,11 @@
 #!/usr/bin/expect
+
+##################################
+# Created and managed by Cisco:  #
+#  Howard Shen                   #
+#  yoshen@cisco.com              #
+##################################
+
 exp_internal 0
 set timeout 30
 log_user 0
