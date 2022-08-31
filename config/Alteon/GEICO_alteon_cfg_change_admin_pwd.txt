@@ -1,6 +1,6 @@
-CONNECT:USERNAME=admin PASSWORD=Ct!X1hU5?B)V8P%f LOGIN_PROMPT=# CIPHER=3des
+CONNECT:USERNAME=admin PASSWORD=Pa$$w0rd1 LOGIN_PROMPT=# CIPHER=3des
 XERROR
-	CONNECT:USERNAME=admin PASSWORD=Ct!X1hU5?B)V8P%f LOGIN_PROMPT=# 
+	CONNECT:USERNAME=admin PASSWORD=Pa$$w0rd2 LOGIN_PROMPT=# 
 XEND
 
 SEND:/cfg/sys/access/user
@@ -9,13 +9,13 @@ EXPECT:User Access Control#
 SEND:admpw
 EXPECT:Enter current admin password:
 
-SEND:Ct!X1hU5?B)V8P%f
+SEND:${V:DEV_PWD}
 EXPECT:Enter new administrator password:
 
-SEND:D97EXwnE1$1lQoxhT1j#
+SEND:Pa$$w0rd3
 EXPECT:Re-enter new administrator password:
 
-SEND:D97EXwnE1$1lQoxhT1j#
+SEND:Pa$$w0rd3
 EXPECT:User Access Control#
 
 [T:60]SEND:apply
