@@ -1,4 +1,4 @@
-PROCDEF:send_scp_to_dev SERVER={10.242.15.247} USER={yoshen} PWD={Ct!X1hU5?B)V8P%f} SF
+PROCDEF:send_scp_to_dev SERVER={10.242.15.247} USER={yoshen} PWD={Pa$$w0rd}
 	[T:3600]SEND:copy scp: disk0:
 	XPECT:Address or name of remote host
 		SEND:${A:SERVER}
@@ -71,9 +71,8 @@ PROCDEF:exec_scp_to_dev SF DF
 	XEND
 PROCEND
 
-PROCDEF:connect_with_dav 
-	#CONNECT:USERNAME=SRV-NW-HPNAS-FR-PD PASSWORD=4-TawrESp_2uP3he LOGIN_PROMPT=> ENABLE_PROMPT=#
-	CONNECT:USERNAME=c215914 PASSWORD=Y0ngh0ng)) LOGIN_PROMPT=> ENABLE_PROMPT=#
+PROCDEF:connect_with_dav
+	CONNECT:USERNAME=c215914 PASSWORD={Pa$$w0rd} LOGIN_PROMPT=> ENABLE_PROMPT=#
 	XERROR
 		REGEX:${DEV:IP},No access
 		<A:dav>XPECT:(.*)
@@ -84,4 +83,3 @@ PROCDEF:connect_with_dav
 	<A:dav>XPECT:(.*)
 	XEND
 PROCEND
-
